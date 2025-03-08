@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Dia das Mulheres 🌸</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #ff6b81;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      color: #666;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .versiculo {
+      font-style: italic;
+      color: #ff8c94;
+      font-size: 1rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #ffd1d6;
+    }
+
+    button {
+      background: linear-gradient(45deg, #ff6b81, #ff8c94);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 129, 0.6);
+    }
+
+    .content-container {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .content-container.visible {
+      opacity: 1;
+      max-height: 500px;
+      margin-top: 2rem;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .image-container img:hover {
+      transform: scale(1.03);
+    }
+
+    .message-overlay {
+      background: linear-gradient(45deg, #ff8c94, #ffcad4);
+      padding: 1rem;
+      border-radius: 10px;
+      color: white;
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      animation: slideUp 0.5s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.5rem;
+      color: #ff6b81;
+      animation: floatUp 3s ease-in-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg) scale(1.5); opacity: 0; }
+    }
+
+    /* Estilo atualizado para a assinatura */
+    .assinatura {
+      text-align: right;
+      font-style: italic;
+      color: #ff8c94; /* Mesma cor do versículo */
+      font-size: 0.9rem; /* Tamanho menor que o padrão */
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.5rem;
+        max-width: 90%;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Feliz Dia das Mulheres 🌸</h1>
+    <p>Hoje é um dia especial para celebrar alguém ainda mais especial!</p>
+    <button id="surpriseButton" aria-label="Clique para revelar uma surpresa especial">Clique para uma surpresa!</button>
+    <div class="content-container" id="content">
+      <figure class="image-container">
+        <img src="IMG-20250221-WA0003.jpg" alt="Foto especial em celebração ao Dia das Mulheres">
+        <figcaption class="message-overlay">Você é incrível, inspiradora e merece o mundo! 💕</figcaption>
+      </figure>
+      <p class="versiculo">"Ela é forte e digna, ri sem medo do futuro." – Provérbios 31:25</p>
+      <p class="assinatura">Com carinho, João</p> <!-- Assinatura movida para dentro do conteúdo dinâmico -->
+    </div>
+  </main>
+
+  <script>
+    const content = document.getElementById('content');
+    const button = document.getElementById('surpriseButton');
+    let isVisible = false;
+
+    button.addEventListener('click', () => {
+      if (!isVisible) {
+        content.classList.add('visible');
+        createHearts(10); // Limite de 10 corações
+      } else {
+        content.classList.remove('visible');
+      }
+      isVisible = !isVisible;
+    });
+
+    function createHearts(count) {
+      const container = document.querySelector('.container');
+      const containerRect = container.getBoundingClientRect();
+
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.classList.add('heart');
+        
+        heart.style.left = `${containerRect.left + Math.random() * containerRect.width}px`;
+        heart.style.animationDuration = `${2 + Math.random() * 2}s`;
+        
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>
